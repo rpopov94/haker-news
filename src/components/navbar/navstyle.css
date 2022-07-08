@@ -1,0 +1,24 @@
+.navStyle{
+    background-color: #ff6600;
+    padding: 2px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10pt;
+    color: #000000;
+    line-height: 12px;
+}
+.ic{
+    border: 1px solid white ;
+    width: 18px;
+    aspect-ratio: auto 18 / 18;
+    height: 18px;
+}
+.b{
+    margin-right: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000000;
+}
+.links{
+    text-decoration: none;
+    color: #000000;
+}
