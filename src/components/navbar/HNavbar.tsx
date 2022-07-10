@@ -3,27 +3,51 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import './navstyle.css';
 import icon from "../../images/y18.gif";
+import {NavLink} from 'react-router-dom';
 
 function HNavbar() {
   return (
-  <Container>
-    <Navbar className="navStyle" variant="light"  expand="lg">
-      <img className="ic" src={icon} alt="icon"/>
-      <Nav className="me-auto">
-        <Nav.Link className='b' href="#news">Hacker News</Nav.Link>
-        <Nav.Link className="links" href="#newest">new |</Nav.Link>
-        <Nav.Link className="links" href="#front">past |</Nav.Link>
-        <Nav.Link className="links" href="#newcomments">comments |</Nav.Link>
-        <Nav.Link className="links" href="#ask">ask |</Nav.Link>
-        <Nav.Link className="links" href="#show">show |</Nav.Link>
-        <Nav.Link className="links" href="#jobs">jobs |</Nav.Link>
-        <Nav.Link className="links" href="#submit"></Nav.Link>
-      </Nav>
-      <Nav>
-        <Nav.Link href="#login">login</Nav.Link>
-      </Nav>
-    </Navbar>
-  </Container>
+  <div className='body'>
+      <Container>
+        <Navbar className="navStyle" variant="light"  expand="lg">
+          <Nav className="me-auto">
+            <Navbar.Brand>
+              <NavLink to='/'>
+                <img
+                  alt=""
+                  src={icon}
+                  className="d-inline-block align-top ic"
+                />{' '}
+                <span className="b">Hacker News</span>
+              </NavLink>
+            </Navbar.Brand>
+            <Nav.Link>
+              <NavLink className="link" to="newest">new |</NavLink>
+            </Nav.Link>
+            <Nav.Link>
+              <NavLink className="link" to="past">past |</NavLink>
+            </Nav.Link>
+            <Nav.Link>
+              <NavLink className="link" to="newcomments">comments |</NavLink>
+            </Nav.Link>
+            <Nav.Link>
+              <NavLink className="link" to="ask">ask |</NavLink>
+            </Nav.Link>
+            <Nav.Link >
+              <NavLink className="link" to="show">show |</NavLink>
+            </Nav.Link>
+            <Nav.Link>
+              <NavLink className="link" to="jobs">jobs |</NavLink>  
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link>
+              <NavLink className="link" to="login">login</NavLink>  
+            </Nav.Link>
+          </Nav>
+        </Navbar>
+      </Container>
+  </div>
   );
 }
 
