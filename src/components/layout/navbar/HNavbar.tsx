@@ -2,12 +2,12 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import './navstyle.css';
-import icon from "../../images/y18.gif";
+import icon from "../../../images/y18.gif";
 import {NavLink} from 'react-router-dom';
 
 function HNavbar() {
   return (
-  <div className='body'>
+  <div>
       <Container>
         <Navbar className="navStyle" variant="light"  expand="lg">
           <Nav className="me-auto">
@@ -37,7 +37,7 @@ function HNavbar() {
               <NavLink className="link" to="show">show |</NavLink>
             </Nav.Link>
             <Nav.Link>
-              <NavLink className="link" to="jobs">jobs |</NavLink>  
+              <NavLink className="link" to="jobs">jobs</NavLink>  
             </Nav.Link>
           </Nav>
           <Nav>
