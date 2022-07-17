@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,8 +12,9 @@ function App() {
     <div>
       <HNavbar/>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/newest' element={<New/>}/>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/newest" element={<Home />}/>
+        <Route path="/newest/:id" element={<New/>} />
       </Routes>
       <HFooter/>
     </div>
