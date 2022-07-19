@@ -1,7 +1,7 @@
-export interface NewsState {
+export interface NewsItems {
     news: any[];
+    error: null| string;
     loading: boolean;
-    error: null | string;
 }
 
 export enum NewsActionTypes {

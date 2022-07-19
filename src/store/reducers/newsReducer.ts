@@ -1,12 +1,12 @@
-import {NewsAction, NewsActionTypes, NewsState} from "../../types/news_types";
+import {NewsAction, NewsActionTypes, NewsItems} from "../../types/news_types";
 
-const initialState: NewsState = {
+const initialState: NewsItems = {
     news: [],
     error: null,
     loading: false
 }
 
-export const newsReducer = (state = initialState, action: NewsAction): NewsState => {
+export const newsReducer = (state = initialState, action: NewsAction): NewsItems => {
     switch (action.type) {
         case NewsActionTypes.FETCH_NEWS:
             return {...state, loading: true}
