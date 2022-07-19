@@ -21,29 +21,8 @@ function HNavbar() {
                 <span className="b">Hacker News</span>
               </NavLink>
             </Navbar.Brand>
-            <Nav.Link>
-              <NavLink className="link" to="newest">new |</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink className="link" to="past">past |</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink className="link" to="newcomments">comments |</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink className="link" to="ask">ask |</NavLink>
-            </Nav.Link>
-            <Nav.Link >
-              <NavLink className="link" to="show">show |</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink className="link" to="jobs">jobs</NavLink>  
-            </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link>
-              <NavLink className="link" to="login">login</NavLink>  
-            </Nav.Link>
           </Nav>
         </Navbar>
       </Container>

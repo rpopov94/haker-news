@@ -26,7 +26,7 @@ function Home() {
             <div className='wrapper'>
                 <ol className="bullet">
                     {news.map((news, i) =>
-                        <li><Link to={`/news/${news.id}`}>{news.title}</Link> / Rating: {news.points} / User: {news.user} / Date of publication: {news.time}</li>
+                        <li><Link to={`/news/${news.id}`}>{news.title}</Link> / Rating: {news.points} / User: {news.user} / Date of publication: {news.time_ago}</li>
                     )}
                 </ol>
             </div>

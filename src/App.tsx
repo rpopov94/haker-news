@@ -3,20 +3,18 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HNavbar from './components/navbar/HNavbar';
 import Home from './components/home/Home';
-import HFooter from './components/footer/HFooter';
-import New from './components/New/New';
+import NewID from './components/detail/NewID';
 
 
 function App() {
-  return (
+    return (
     <div>
       <HNavbar/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/newest" element={<Home />}/>
-        <Route path="/newest/:id" element={<New/>} />
+        <Route path="/news" element={<Home/>}/>
+        <Route path="/news/:id" element={<NewID/>} />
       </Routes>
-      <HFooter/>
     </div>
   );
 }
