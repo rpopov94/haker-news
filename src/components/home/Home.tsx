@@ -5,7 +5,6 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-
 function Home() {
   const {error, loading, news} = useTypedSelector(state => state.news)
   const {fetchNews} = useActions()
@@ -15,7 +14,11 @@ function Home() {
   }, [])
 
   if (loading) {
-      return <Container><h1>Идет загрузка...</h1></Container>
+      return(
+      <Container>
+          <div className="loader"></div>
+      </Container>
+      )
   }
   if (error) {
       return <Container><h1>{error}</h1></Container>

@@ -14,7 +14,11 @@ function NewID (){
   }, [])
 
   if (loading) {
-    return <Container><h1>Идет загрузка...</h1></Container>
+    return(
+      <Container>
+          <div className="loader"></div>
+      </Container>
+    )
   }
   if (error) {
     return <Container><h1>{error}</h1></Container>

@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
-import { store } from './store/index';
+import { store } from './store';
 
 
 const root = ReactDOM.createRoot(
@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <React.StrictMode>
-      <BrowserRouter basename= {process.env.PUBLIC_URL || "/"}>
+      <BrowserRouter basename={process.env.PUBLIC_URL || "/"}>
         <App />
       </BrowserRouter>
     </React.StrictMode>
