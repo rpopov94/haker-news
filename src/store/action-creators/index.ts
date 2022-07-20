@@ -1,6 +1,5 @@
-import * as TodoActionCreators from './news'
+import * as ActionCreators from './news'
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    ...TodoActionCreators,
+    ...ActionCreators,
 }
