@@ -16,21 +16,31 @@ function NewID (){
   if (loading) {
     return(
       <Container>
-          <div className="loader"></div>
+          <div className='background'>
+              <div className="loader"></div>
+          </div>
       </Container>
     )
   }
   if (error) {
-    return <Container><h1>{error}</h1></Container>
+    return (
+    <Container>
+        <div className='background'>
+            <h1>{error}</h1>
+        </div>
+    </Container>
+    )
   }
 
   return (
       <Container>
-        <a href={new_id.url}>{new_id.title}</a><br/>
-        Дата публикации: {new_id.time}<br/>
-        Автор: {new_id.by}<br/>
-        {/*Cчётчик количества комментариев: {new_id.kids.leng}*/}
+          <div className='background'>
+            <a href={new_id.url}>{new_id.title}</a><br/>
+            Дата публикации: {new_id.time}<br/>
+            Автор: {new_id.by}<br/>
+            Счётчик комментариев: {new_id.descendants}
+          </div>
       </Container>
   )
-};
+}
 export default NewID;
