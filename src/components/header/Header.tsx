@@ -3,47 +3,55 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import './navstyle.css';
 import icon from "../../images/y18.gif";
-import {NavLink} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
+import {Button} from "react-bootstrap";
+import {fetchNews} from "../../store/action-creators/news";
 
-function HNavbar() {
+export interface HeaderProps {
+  updateData: (mode: string, id?: number | undefined) => void;
+  mode: 'news' | 'comments';
+}
+
+const Header: React.FC<HeaderProps> = ({ updateData, mode })  => {
+
+  const back = useNavigate();
+
+  const goBack = () =>{
+    back('/');
+  }
+
   return (
   <div>
       <Container>
         <Navbar className="navStyle" variant="light"  expand="lg">
           <Nav className="me-auto">
             <Navbar.Brand>
-              <NavLink to='/'>
-                <img
-                  alt=""
-                  src={icon}
-                  className="d-inline-block align-top ic"
-                />{' '}
-                <span className="b">Hacker News</span>
-              </NavLink>
+              {
+                mode === 'news'?
+                    <Button onClick={() => updateData(mode)}>
+                      <img
+                          alt=""
+                          src={icon}
+                          className="d-inline-block align-top ic"
+                      />{' '}
+                      <span className="b">Hacker News</span>
+                    </Button>:
+                    <>
+                      <Button onClick={() => goBack()}>
+                        <img
+                            alt=""
+                            src={icon}
+                            className="d-inline-block align-top ic"
+                        />{' '}
+                        <span className="b">Go Back</span>
+                      </Button>
+                      {' '}
+                      <Button onClick={() => updateData("comments")}>
+                        <span className="b">Update comments</span>
+                      </Button>
+                    </>
+              }
             </Navbar.Brand>
-            <Nav.Link>
-              <NavLink className="link" to="newest">new |</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink className="link" to="past">past |</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink className="link" to="newcomments">comments |</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink className="link" to="ask">ask |</NavLink>
-            </Nav.Link>
-            <Nav.Link >
-              <NavLink className="link" to="show">show |</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink className="link" to="jobs">jobs</NavLink>  
-            </Nav.Link>
-          </Nav>
-          <Nav>
-            <Nav.Link>
-              <NavLink className="link" to="login">login</NavLink>  
-            </Nav.Link>
           </Nav>
         </Navbar>
       </Container>
@@ -51,4 +59,4 @@ function HNavbar() {
   );
 }
 
-export default HNavbar;
+export default Header;

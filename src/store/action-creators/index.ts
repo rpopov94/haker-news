@@ -1,5 +1,5 @@
-import * as ActionCreators from './news'
+import * as TodoActionCreators from './news'
 
 export default {
-    ...ActionCreators,
+    ...TodoActionCreators,
 }

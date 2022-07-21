@@ -5,46 +5,52 @@ export interface NewsItems {
 }
 
 export enum NewsActionTypes {
-    FETCH_NEWS = 'FETCH_NEWS',
-    FETCH_NEWS_SUCCESS = 'FETCH_NEWS_SUCCESS',
-    FETCH_NEWS_ERROR = 'FETCH_NEWS_ERROR',
+    FETCH_ITEMS = 'FETCH_ITEMS',
+    FETCH_ITEMS_SUCCESS = 'FETCH_ITEMS_SUCCESS',
+    FETCH_ITEMS_ERROR = 'FETCH_ITEMS_ERROR',
 }
-interface FetchNewsAction {
-    type: NewsActionTypes.FETCH_NEWS
+interface FetchAction {
+    type: NewsActionTypes.FETCH_ITEMS
 }
-interface FetchNewsSuccessAction {
-    type: NewsActionTypes.FETCH_NEWS_SUCCESS;
+interface FetchSuccessAction {
+    type: NewsActionTypes.FETCH_ITEMS_SUCCESS;
     payload: any[];
 }
-interface FetchNewsErrorAction {
-    type: NewsActionTypes.FETCH_NEWS_ERROR;
+interface FetchErrorAction {
+    type: NewsActionTypes.FETCH_ITEMS_ERROR;
     payload: string;
 }
 
-export type NewsAction =
-    FetchNewsAction
-    | FetchNewsErrorAction
-    | FetchNewsSuccessAction
+export type Actions =
+    FetchAction
+    | FetchErrorAction
+    | FetchSuccessAction
 
-export interface NewItem {
-    new_id: any;
-    error: null| string;
+export interface LoadingState {
     loading: boolean;
+    loadingStatus?: {
+        loading: boolean;
+    };
 }
 
-interface FetchNewIdAction {
-    type: NewsActionTypes.FETCH_NEWS
-}
-interface FetchNewIdSuccessAction {
-    type: NewsActionTypes.FETCH_NEWS_SUCCESS;
-    payload: any;
-}
-interface FetchNewIdErrorAction {
-    type: NewsActionTypes.FETCH_NEWS_ERROR;
-    payload: string;
+export interface NewsItemType {
+    id?: number;
+    index?: number;
+    title: string;
+    url?: string;
+    points: number;
+    user: string;
+    time: number;
+    commentsCount?: number;
 }
 
-export type NewIdAction =
-    FetchNewIdAction
-    | FetchNewIdErrorAction
-    | FetchNewIdSuccessAction
+export interface CommentsItemType {
+    id: number;
+    type: string;
+    title: string;
+    points: number;
+    user: string;
+    time: number;
+    content: string;
+    comments: Array<CommentsItemType>;
+}

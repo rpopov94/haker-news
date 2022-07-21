@@ -1,47 +1,22 @@
 import {Dispatch} from "redux";
 import axios from "axios";
-import {NewIdAction, NewsAction, NewsActionTypes, NewsItems} from "../../types/news_types";
-
-const NUMRER_PAGES = 4;
+import {Actions, NewsActionTypes} from "../../types/news_types";
 
 export const fetchNews = () => {
-    const urls: string[] = [];
-    return async (dispatch: Dispatch<NewsAction>) => {
+    return async (dispatch: Dispatch<Actions>) => {
         try {
-            dispatch({type: NewsActionTypes.FETCH_NEWS})
-            for (let i = 1; i <= NUMRER_PAGES; i++) {
-                urls.push(`https://api.hnpwa.com/v0/news/${i}.json`);
-            }
-            const request = urls.map((url) => fetch(url))
-            setTimeout(() =>{
-                Promise.all(request)
-                    .then((responses) => Promise.all(responses.map((response) => response.clone().json())))
-                    .then((jsons) => jsons.forEach((json) => dispatch({type: NewsActionTypes.FETCH_NEWS_SUCCESS, payload: json})));
-                }, 200
-            )
+            dispatch({type: NewsActionTypes.FETCH_ITEMS})
+            const response = await axios.get('https://api.hnpwa.com/v0/news/1.json')
+            dispatch({type: NewsActionTypes.FETCH_ITEMS_SUCCESS, payload: response.data})
+            setInterval(() => {
+                dispatch({type: NewsActionTypes.FETCH_ITEMS_SUCCESS, payload: response.data})
+            }, 60000)
         } catch (e) {
             dispatch({
-                type: NewsActionTypes.FETCH_NEWS_ERROR,
-                payload: 'Произошла ошибка при загрузке списка новостей.'
+                type: NewsActionTypes.FETCH_ITEMS_ERROR,
+                payload: 'Произошла ошибка при загрузке списка дел'
             })
         }
     }
 }
 
-export const fetchNewsById = (id: string | undefined) => {
-    return async (dispatch: Dispatch<NewIdAction>) => {
-        try {
-            dispatch({type: NewsActionTypes.FETCH_NEWS})
-            setTimeout(() =>{
-                const response = fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
-                    .then((response) => response.json())
-                    .then((json) => dispatch({type: NewsActionTypes.FETCH_NEWS_SUCCESS, payload: json}))
-            }, 200)
-        } catch (e) {
-            dispatch({
-                type: NewsActionTypes.FETCH_NEWS_ERROR,
-                payload: 'Произошла ошибка при загрузке новости.'
-            })
-        }
-    }
-}
