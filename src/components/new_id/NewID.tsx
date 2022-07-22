@@ -1,11 +1,12 @@
 import { Container } from "react-bootstrap";
+import {useParams} from "react-router-dom";
 
-
-function NewID(){
+const NewID = () => {
+    const {id} = useParams();
     return(
         <>
             <Container>
-                new
+                {id}
             </Container>
         </>
     );

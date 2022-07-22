@@ -3,16 +3,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import './navstyle.css';
 import icon from "../../images/y18.gif";
-import {NavLink, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import {Button} from "react-bootstrap";
-import {fetchNews} from "../../store/action-creators/news";
 
 export interface HeaderProps {
-  updateData: (mode: string, id?: number | undefined) => void;
   mode: 'news' | 'comments';
 }
 
-const Header: React.FC<HeaderProps> = ({ updateData, mode })  => {
+const Header: React.FC<HeaderProps> = ({mode })  => {
 
   const back = useNavigate();
 
@@ -28,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ updateData, mode })  => {
             <Navbar.Brand>
               {
                 mode === 'news'?
-                    <Button onClick={() => updateData(mode)}>
+                    <Button>
                       <img
                           alt=""
                           src={icon}
@@ -46,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({ updateData, mode })  => {
                         <span className="b">Go Back</span>
                       </Button>
                       {' '}
-                      <Button onClick={() => updateData("comments")}>
+                      <Button>
                         <span className="b">Update comments</span>
                       </Button>
                     </>
