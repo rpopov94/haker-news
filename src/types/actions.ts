@@ -1,26 +1,34 @@
-import {NewsItemType} from "./types";
+import {CommentsItemType, NewsItemType} from "./types";
 
-export enum NewsActionTypes {
-    FETCH_ITEMS = 'FETCH_ITEMS',
-    FETCH_ITEMS_SUCCESS = 'FETCH_ITEMS_SUCCESS',
-    FETCH_ITEMS_ERROR = 'FETCH_ITEMS_ERROR',
+export enum ActionTypes {
+    FETCH_NEWS_SUCCESS = 'FETCH_NEWS_SUCCESS',
+    FETCH_NEWS_ERROR = 'FETCH_NEWS_ERROR',
+    FETCH_LIST_COMMENTS = 'FETCH_LIST_COMMENTS',
+    FETCH_COMMENTS_ERROR = 'FETCH_COMMENTS_ERROR',
 }
-interface FetchAction {
-    type: NewsActionTypes.FETCH_ITEMS
-}
-interface FetchSuccessAction {
-    type: NewsActionTypes.FETCH_ITEMS_SUCCESS;
+interface FetchNewsSuccessAction {
+    type: ActionTypes.FETCH_NEWS_SUCCESS;
     payload: Array<NewsItemType>;
 }
-interface FetchErrorAction {
-    type: NewsActionTypes.FETCH_ITEMS_ERROR;
+interface FetchNewsErrorAction {
+    type: ActionTypes.FETCH_NEWS_ERROR;
+    payload: string;
+}
+
+interface FetchListComments {
+    type: ActionTypes.FETCH_LIST_COMMENTS;
+    payload: Array<CommentsItemType>;
+}
+
+interface FetchCommentsError {
+    type: ActionTypes.FETCH_COMMENTS_ERROR;
     payload: string;
 }
 
 export type Actions =
-    FetchAction
-    | FetchErrorAction
-    | FetchSuccessAction
-
+    | FetchNewsErrorAction
+    | FetchNewsSuccessAction
+    | FetchListComments
+    | FetchCommentsError;
 
 

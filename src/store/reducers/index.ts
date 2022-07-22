@@ -1,9 +1,9 @@
 import {combineReducers} from "redux";
-import {news_reducer} from "./news_reducer";
+import {reducer} from "./reducer";
 
 
 export const rootReducer = combineReducers({
-    news: news_reducer,
+    news: reducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

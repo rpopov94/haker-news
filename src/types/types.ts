@@ -1,6 +1,8 @@
 export interface StateType {
     news: Array<NewsItemType>;
     comments: Array<CommentsItemType>;
+    error: null;
+    loading: boolean;
     data?: {
         news: Array<NewsItemType>;
         comments: Array<CommentsItemType>;
@@ -8,8 +10,6 @@ export interface StateType {
 }
 
 export interface NewsItemType {
-    error: null,
-    loading: false,
     id?: number;
     index?: number;
     title: string;

@@ -18,6 +18,10 @@ const Header: React.FC<HeaderProps> = ({mode })  => {
     back('/');
   }
 
+  const updateNews = () => {
+
+  }
+
   return (
   <div>
       <Container>
@@ -26,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({mode })  => {
             <Navbar.Brand>
               {
                 mode === 'news'?
-                    <Button>
+                    <Button onClick={updateNews}>
                       <img
                           alt=""
                           src={icon}

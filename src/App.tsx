@@ -5,12 +5,17 @@ import Header from './components/header/Header';
 import Home from './components/home/Home';
 import NewID from './components/new_id/NewID';
 import React from "react";
-import {useTypedSelector} from "./hooks/useTypedSelector";
-import {Loader} from "semantic-ui-react";
+import {useDispatch} from "react-redux";
+import {getComments} from "./store/action-creators/manageApi";
+import { useActions } from './hooks/useActions';
 
 const App = () => {
 
-  const news = useTypedSelector(state => state.news);
+  const {getComments} = useActions();
+
+  const updateData = (id: number) => {
+      getComments(id);
+  };
 
   return (
     <div>
@@ -19,14 +24,13 @@ const App = () => {
         <Route path="/" element={
             <>
                 <Header mode="news"/>
-                {news.data  && <Loader/>}
                 <Home/>
             </>
         }/>
         <Route path="/news/:id" element={
             <>
                 <Header mode="comments"/>
-                <NewID/>
+                <NewID updateData={updateData}/>
             </>
 
         } />

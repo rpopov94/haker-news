@@ -1,4 +1,4 @@
-import * as ActionCreators from './news'
+import * as ActionCreators from './manageApi'
 
 export default {
     ...ActionCreators,

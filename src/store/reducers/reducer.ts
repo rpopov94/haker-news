@@ -1,18 +1,17 @@
-import {
-    Actions,
-    NewsActionTypes,
-} from "../../types/actions";
+import {Actions, ActionTypes,} from "../../types/actions";
 import {NewsItemType, StateType} from "../../types/types";
 
 
 const initialState: StateType = {
     news: [],
-    comments: []
+    comments: [],
+    error: null,
+    loading: true,
 }
 
-export const news_reducer = (state = initialState, action: Actions): StateType => {
+export const reducer = (state = initialState, action: Actions): StateType => {
     switch (action.type) {
-        case NewsActionTypes.FETCH_ITEMS_SUCCESS: {
+        case ActionTypes.FETCH_NEWS_SUCCESS: {
             const newState = {...state};
             if (action.payload) {
                 newState?.news?.push(...action.payload);
@@ -31,7 +30,14 @@ export const news_reducer = (state = initialState, action: Actions): StateType =
 
             return {...newState};
         }
+        case ActionTypes.FETCH_LIST_COMMENTS: {
+            const newState = { ...state };
+            if (action.payload) {
+                newState.comments = action.payload;
+            }
 
+            return newState;
+        }
         default:
             return state;
     }
