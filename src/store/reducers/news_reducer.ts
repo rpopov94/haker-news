@@ -9,7 +9,7 @@ const initialState: StateType = {
     loading: true,
 }
 
-export const reducer = (state = initialState, action: Actions): StateType => {
+export const news_reducer = (state = initialState, action: Actions): StateType => {
     switch (action.type) {
         case ActionTypes.FETCH_NEWS_SUCCESS: {
             const newState = {...state};
@@ -30,8 +30,15 @@ export const reducer = (state = initialState, action: Actions): StateType => {
 
             return {...newState};
         }
+        default:
+            return state;
+    }
+}
+
+export const CommReducer = (state = initialState, action: Actions): StateType => {
+    switch (action.type) {
         case ActionTypes.FETCH_LIST_COMMENTS: {
-            const newState = { ...state };
+            const newState = {...state};
             if (action.payload) {
                 newState.comments = action.payload;
             }
@@ -41,4 +48,5 @@ export const reducer = (state = initialState, action: Actions): StateType => {
         default:
             return state;
     }
+
 }

@@ -7,14 +7,14 @@ export interface PostPageProps {
 }
 
 const NewID : React.FC<PostPageProps> = ({ updateData }) => {
-    const news = useTypedSelector(state => state.news)
+    const commit = useTypedSelector(state => state.commit_id)
     const {id} = useParams();
     updateData(Number(id));
 
     return(
         <>
             <Container>
-                {id}
+
             </Container>
         </>
     );
