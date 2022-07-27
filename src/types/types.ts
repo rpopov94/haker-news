@@ -1,7 +1,7 @@
 export interface StateType {
     news: Array<NewsItemType>;
     comments: Array<CommentsItemType>;
-    error: null;
+    error: string;
     loading: boolean;
     data?: {
         news: Array<NewsItemType>;
@@ -17,7 +17,7 @@ export interface NewsItemType {
     points: number;
     user: string;
     time: number;
-    commentsCount?: number;
+    comments_count?: number;
 }
 
 export interface CommentsItemType {

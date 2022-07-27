@@ -10,15 +10,15 @@ export interface HeaderProps {
   mode: 'news' | 'comments';
 }
 
-const Header: React.FC<HeaderProps> = ({mode })  => {
+const Header: React.FC<HeaderProps> = ({mode})  => {
 
   const back = useNavigate();
 
-  const goBack = () =>{
+  const goHome = () =>{
     back('/');
   }
 
-  const updateNews = () => {
+  const updateComments = () => {
 
   }
 
@@ -30,16 +30,16 @@ const Header: React.FC<HeaderProps> = ({mode })  => {
             <Navbar.Brand>
               {
                 mode === 'news'?
-                    <Button onClick={updateNews}>
+                    <Button onClick={() => goHome()}>
                       <img
                           alt=""
                           src={icon}
                           className="d-inline-block align-top ic"
                       />{' '}
-                      <span className="b">Hacker News</span>
+                      <span className="b">Update</span>
                     </Button>:
                     <>
-                      <Button onClick={() => goBack()}>
+                      <Button onClick={() => goHome()}>
                         <img
                             alt=""
                             src={icon}
@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({mode })  => {
                         <span className="b">Go Back</span>
                       </Button>
                       {' '}
-                      <Button>
+                      <Button onClick={() => updateComments()}>
                         <span className="b">Update comments</span>
                       </Button>
                     </>

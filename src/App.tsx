@@ -4,19 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import NewID from './components/new_id/NewID';
-import React from "react";
-import {useDispatch} from "react-redux";
-import {getComments} from "./store/action-creators/manageApi";
-import { useActions } from './hooks/useActions';
+import { useTypedSelector } from './hooks/useTypedSelector';
+import Loader from "./components/loader/Loader";
+import { Container } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { ActionTypes } from "./types/actions";
 
 const App = () => {
 
-  const {getComments} = useActions();
-
-  const updateData = (id: number) => {
-      getComments(id);
-  };
-
+  const news = useTypedSelector(state => state.news)
+    
   return (
     <div>
 
@@ -24,13 +21,31 @@ const App = () => {
         <Route path="/" element={
             <>
                 <Header mode="news"/>
+                {
+                  news.error? <Container>"Oops, you catch error!"</Container>:
+                  news.loading && <Loader/>
+                }
+                <Home/>
+            </>
+        }/>
+        <Route path="/news" element={
+            <>
+                <Header mode="news"/>
+                {
+                  news.error? <Container>"Oops, you catch error!"</Container>:
+                  news.loading && <Loader/>
+                }
                 <Home/>
             </>
         }/>
         <Route path="/news/:id" element={
             <>
                 <Header mode="comments"/>
-                <NewID updateData={updateData}/>
+                {
+                  news.error? <Container>"Oops, you catch error!"</Container>:
+                  news.loading && <Loader/>
+                }
+                <NewID/>
             </>
 
         } />

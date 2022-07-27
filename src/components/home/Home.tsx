@@ -1,31 +1,33 @@
 import Container from 'react-bootstrap/Container';
-import {useEffect} from 'react';
-import { useActions } from '../../hooks/useActions';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { Link } from 'react-router-dom';
 import './style.css';
-
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import { useEffect } from 'react';
+import { NewsItemType } from '../../types/types';
+import { fetchNews } from '../../store/action-creators/manageApi';
+import { useActions } from '../../hooks/useActions';
+import { ActionTypes } from '../../types/actions';
+import { useDispatch } from 'react-redux';
 
 const Home = () => {
-  const news = useTypedSelector(state => state.news)
-  const {fetchNews} = useActions();
-
-  const getDate = (secs : number) =>{
+    const {fetchNews} = useActions();
+    const news = useTypedSelector(state => state.news)
+    const dispatch = useDispatch();
+    dispatch({type: ActionTypes.CLEAR_ALL_NEWS, payload: []});
+    const getDate = (secs : number) =>{
       const t = new Date();
       t.setMilliseconds(secs);
-      return `${t.getUTCDay()}/${t.getMonth()}/${t.getFullYear()}`
-  }
+      return `${t.getUTCDate()}/${t.getMonth()}/${t.getFullYear()}`
+    }
+    useEffect(() => {
+        fetchNews();
+    }, [])
 
-  useEffect(() => {
-      fetchNews();
-      setInterval(() => fetchNews(), 60000)
-  }, [])
-
-  return (
-      <Container>
+    return (
+        <Container>
             <div className='wrapper'>
                 <ol className="bullet">
-                    {news.news.map((news) =>
+                    {news.news.map((news: NewsItemType) =>
                         <li>
                             <Link to={`/news/${news.id}`}>
                             {news.title}</Link>
