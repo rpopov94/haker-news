@@ -5,6 +5,7 @@ import './navstyle.css';
 import icon from "../../images/y18.gif";
 import { useNavigate} from 'react-router-dom';
 import {Button} from "react-bootstrap";
+import { useActions } from '../../hooks/useActions';
 
 export interface HeaderProps {
   mode: 'news' | 'comments';
@@ -16,6 +17,10 @@ const Header: React.FC<HeaderProps> = ({mode})  => {
 
   const goHome = () =>{
     back('/');
+  }
+  const {fetchNews} = useActions();
+  const updateNews = () => {
+    fetchNews();
   }
 
   const updateComments = () => {
@@ -30,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({mode})  => {
             <Navbar.Brand>
               {
                 mode === 'news'?
-                    <Button onClick={() => goHome()}>
+                    <Button onClick={() => updateNews()}>
                       <img
                           alt=""
                           src={icon}

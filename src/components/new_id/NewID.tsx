@@ -2,24 +2,22 @@ import { useEffect, useMemo } from "react";
 import { Container } from "react-bootstrap";
 import {useParams} from "react-router-dom";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import { CommentsItemType, NewsItemType, StateType } from "../../types/types";
-import { useActions } from '../../hooks/useActions';
+import { fetchNews, getComments } from "../../store/action-creators/manageApi";
+import { NewsItemType } from "../../types/types";
 import './style.css';
-import { useSelector } from 'react-redux';
 
 const NewID = () => {
     const news = useTypedSelector(state => state.news);
-    const {getComments} = useActions();
     const {id} = useParams();
-    useEffect(() => {
+    useEffect(() =>{
         getComments(Number(id));
-    }, [])
-    // const comments = useTypedSelector(state => state.comments);
-    const comments = useSelector((state: StateType) => state.comments);
+    })
+    const comment = useTypedSelector(state => state.comments);
+
     const getDate = (secs : number) =>{
         const t = new Date();
         t.setMilliseconds(secs);
-        return `${t.getUTCDate()}/${t.getMonth()}/${t.getFullYear()}`
+        return `${t.getUTCDay() + 1}/${t.getMonth()}/${t.getFullYear()}`
       }
     const newsItem = useMemo(
         () => news.news.find((item: NewsItemType) => item.id === Number(id)),
@@ -43,11 +41,6 @@ const NewID = () => {
                     </div>
                 </div>
                 </div>
-               <>
-                {comments.map((item: CommentsItemType) => 
-                    {item.id}
-                )}
-               </>
             </Container>
         </>
     );
