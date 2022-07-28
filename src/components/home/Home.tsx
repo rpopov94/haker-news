@@ -22,6 +22,8 @@ const Home = () => {
         }, 60000)
     }, [])
 
+    
+
     return (
         <Container>
             <div className='wrapper'>

@@ -5,6 +5,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import { CommentsItemType, NewsItemType } from "../../types/types";
 import { useActions } from '../../hooks/useActions';
 import './style.css';
+import { Item } from "semantic-ui-react";
 
 
 const NewID = () => {
@@ -26,6 +27,8 @@ const NewID = () => {
         () => newsItems.news.find((item: NewsItemType) => item.id === Number(id)),
         [newsItems, id]
     );
+    const arrayOfComments = (Array.isArray(comments) && comments) || comments?.comments;
+    console.log(arrayOfComments)
     return(
         <>
             <Container>
@@ -34,13 +37,13 @@ const NewID = () => {
                         <div className="col p-4 d-flex flex-column position-static">
                         <h3 className="mb-0"><a href={newsItem?.url}>{newsItem?.title}</a></h3>
                         <div className="mb-1 text-muted">Дата публикации: <i>{getDate(Number(newsItem?.time))}</i></div>
-                        <p className="card-text mb-auto">
-                            <div className="color">
-                                Пользователь: @<i>{newsItem?.user}</i><br/>
-                                Карма: <i>{newsItem?.points}</i><br/>
-                                <i>{newsItem?.comments_count} комментариев</i>
-                            </div>
-                        </p>
+                            <p className="card-text mb-auto">
+                                <div className="color">
+                                    Пользователь: @<i>{newsItem?.user}</i><br/>
+                                    Карма: <i>{newsItem?.points}</i><br/>
+                                    <i>{newsItem?.comments_count} комментариев</i>
+                                </div>
+                            </p>
                         </div>
                     </div>
                 </div>
