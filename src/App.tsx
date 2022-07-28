@@ -7,8 +7,6 @@ import NewID from './components/new_id/NewID';
 import { useTypedSelector } from './hooks/useTypedSelector';
 import Loader from "./components/loader/Loader";
 import { Container } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { ActionTypes } from "./types/actions";
 
 const App = () => {
 

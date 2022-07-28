@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {Actions, ActionTypes} from "../../types/actions";
 
 export const fetchNews = () => {
+   
     const urls = [
         `https://api.hnpwa.com/v0/news/1.json`,
         `https://api.hnpwa.com/v0/news/2.json`,
@@ -9,8 +10,8 @@ export const fetchNews = () => {
         `https://api.hnpwa.com/v0/news/4.json`
     ];
     const requests = urls.map((url) => fetch(url));
-
-    return async (dispatch: Dispatch<Actions>) => {
+    return (dispatch: Dispatch<Actions>) => {
+        dispatch({type: ActionTypes.CLEAR_ALL_NEWS});
         try {
             dispatch({type: ActionTypes.LOAD_NEWS, loading: true})
             setTimeout(() => {
@@ -29,18 +30,17 @@ export const fetchNews = () => {
 
 export const getComments = (id: number): unknown  => {
     return (dispatch: Dispatch<Actions>) => {
-        try {
-            dispatch({type: ActionTypes.LOAD_COMMENTS, loading: true})
+        dispatch({type: ActionTypes.CLEAR_ALL_COMMENTS})
+        setTimeout(() => {
             fetch(`https://api.hnpwa.com/v0/item/${id}.json`)
-                .then((response) => response.json())
-                .then((json) => {
-                    dispatch({type: ActionTypes.FETCH_LIST_COMMENTS, loading: false, payload: json})
-                })
-        } catch (e){
-            dispatch({
+            .then((response) => response.json())
+            .then((json) => {
+                dispatch({type: ActionTypes.FETCH_LIST_COMMENTS, loading: false, payload: json});
+            })
+            .catch(() => dispatch({
                 type: ActionTypes.FETCH_COMMENTS_ERROR,
                 payload: 'Произошла ошибка при загрузке списка комментариев!'
-            })
-        }
+            }));
+        }, 200)  
     };
 };
