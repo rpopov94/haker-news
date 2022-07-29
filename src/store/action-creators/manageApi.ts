@@ -28,7 +28,7 @@ export const fetchNews = () => {
     }
 }
 
-export const getComments = (id: number): unknown  => {
+export const getComments = (id: number) => {
     return (dispatch: Dispatch<Actions>) => {
         dispatch({type: ActionTypes.CLEAR_ALL_COMMENTS})
         setTimeout(() => {

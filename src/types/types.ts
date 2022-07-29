@@ -21,12 +21,12 @@ export interface NewsItemType {
 }
 
 export interface CommentsItemType {
-    id: number;
-    type: string;
-    title: string;
-    points: number;
-    user: string;
-    time: number;
-    content: string;
-    comments: Array<CommentsItemType>;
+    id?: number;
+    type?: string;
+    title?: string;
+    points?: number;
+    user?: string;
+    time?: number;
+    content?: string;
+    comments?: Array<CommentsItemType>;
 }

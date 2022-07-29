@@ -1,12 +1,12 @@
+import './style.css';
 import { useEffect, useMemo } from "react";
 import { Container } from "react-bootstrap";
-import {useParams} from "react-router-dom";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import { CommentsItemType, NewsItemType } from "../../types/types";
+import { useParams } from "react-router-dom";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from '../../hooks/useActions';
-import './style.css';
-import { Item } from "semantic-ui-react";
-
+import { getDate } from "../../utils/utils";
+import {CommentsList} from './CommentsList';
+import { NewsItemType } from '../../types/types';
 
 const NewID = () => {
     const newsItems = useTypedSelector(state => state.news);
@@ -16,19 +16,16 @@ const NewID = () => {
 
     useEffect(() =>{
         getComments(Number(id));
-    }, [comments])
+        setInterval(() =>{
+           getComments(Number(id)); 
+        }, 60000)
+    }, [])
 
-    const getDate = (secs : number) =>{
-        const t = new Date();
-        t.setMilliseconds(secs);
-        return `${t.getUTCDay() + 1}/${t.getMonth()}/${t.getFullYear()}`
-      }
     const newsItem = useMemo(
         () => newsItems.news.find((item: NewsItemType) => item.id === Number(id)),
         [newsItems, id]
     );
-    const arrayOfComments = (Array.isArray(comments) && comments) || comments?.comments;
-    console.log(arrayOfComments)
+    
     return(
         <>
             <Container>
@@ -47,6 +44,8 @@ const NewID = () => {
                         </div>
                     </div>
                 </div>
+                <p>Коммментарии:</p>
+                <CommentsList comments={comments}/>
             </Container>
         </>
     );
