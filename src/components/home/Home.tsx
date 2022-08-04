@@ -1,38 +1,42 @@
-import './style.css';
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import { useEffect } from 'react';
+import {useEffect, useRef} from 'react';
 import { NewsItemType } from '../../types/types';
 import { useActions } from '../../hooks/useActions';
 import { getDate } from '../../utils/utils';
+import {ErrorBoundary} from 'react-error-boundary'
+import {Loader} from "../loader/Loader";
 
 const Home = () => {
     const {fetchNews} = useActions();
     const news = useTypedSelector(state => state.news)
-    
+
     useEffect(() => {
         fetchNews();
-        setInterval(() =>{
+        const intervalId = setInterval(() =>{
             fetchNews();
-        }, 60000)
+        }, 60000);
+        return () => clearInterval(intervalId);
     }, [])
 
     return (
         <Container>
-            <div className='wrapper'>
-                <ol className="bullet">
-                    {news.news.map((news: NewsItemType) =>
-                        <li>
-                            <Link to={`/news/${news.id}`}>
-                            {news.title}</Link>
-                            / Rating: {news.points}
-                            / User: {news.user}
-                            / Date of publication: {getDate(news.time)}
-                        </li>
-                    )}
-                </ol>
-            </div>
+            <ErrorBoundary fallback={<Loader/>}>
+                <div className='wrapper'>
+                    <ol className="bullet">
+                        {news.news.map((news: NewsItemType, id) =>
+                            <li key={id}>
+                                <Link to={`/news/${news.id}`}>
+                                    {news.title}</Link>
+                                / Rating: {news.points}
+                                / User: {news.user}
+                                / Date of publication: {getDate(news.time)}
+                            </li>
+                        )}
+                    </ol>
+                </div>
+            </ErrorBoundary>
       </Container>
   );
 }

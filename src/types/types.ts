@@ -1,19 +1,19 @@
 export interface StateType {
-    news: Array<NewsItemType>;
-    comments: Array<CommentsItemType>;
+    news: NewsItemType[];
+    comments: CommentsItemType[];
     error: string;
     loading: boolean;
     data?: {
-        news: Array<NewsItemType>;
-        comments: Array<CommentsItemType>;
+        news: NewsItemType[];
+        comments: CommentsItemType[];
     };
 }
 
 export interface NewsItemType {
-    id?: number;
-    index?: number;
+    id: number;
+    index: number;
     title: string;
-    url?: string;
+    url: string;
     points: number;
     user: string;
     time: number;
@@ -28,5 +28,5 @@ export interface CommentsItemType {
     user?: string;
     time?: number;
     content?: string;
-    comments?: Array<CommentsItemType>;
+    comments?: CommentsItemType[];
 }

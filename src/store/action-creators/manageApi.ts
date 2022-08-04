@@ -14,11 +14,9 @@ export const fetchNews = () => {
         dispatch({type: ActionTypes.CLEAR_ALL_NEWS});
         try {
             dispatch({type: ActionTypes.LOAD_NEWS, loading: true})
-            setTimeout(() => {
-                Promise.all(requests)
-                    .then((responses) => Promise.all(responses.map((response) => response.clone().json())))
-                    .then((jsons) => jsons.forEach((json) => dispatch({type: ActionTypes.FETCH_NEWS_SUCCESS, loading:false, payload: json})));
-            }, 200)
+            Promise.all(requests)
+                .then((responses) => Promise.all(responses.map((response) => response.clone().json())))
+                .then((jsons) => jsons.forEach((json) => dispatch({type: ActionTypes.FETCH_NEWS_SUCCESS, loading:false, payload: json})));
         } catch (e) {
             dispatch({
                 type: ActionTypes.CATCH_ERROR,
@@ -31,8 +29,7 @@ export const fetchNews = () => {
 export const getComments = (id: number) => {
     return (dispatch: Dispatch<Actions>) => {
         dispatch({type: ActionTypes.CLEAR_ALL_COMMENTS})
-        setTimeout(() => {
-            fetch(`https://api.hnpwa.com/v0/item/${id}.json`)
+        fetch(`https://api.hnpwa.com/v0/item/${id}.json`)
             .then((response) => response.json())
             .then((json) => {
                 dispatch({type: ActionTypes.FETCH_LIST_COMMENTS, loading: false, payload: json});
@@ -40,7 +37,7 @@ export const getComments = (id: number) => {
             .catch(() => dispatch({
                 type: ActionTypes.FETCH_COMMENTS_ERROR,
                 payload: 'Произошла ошибка при загрузке списка комментариев!'
-            }));
-        }, 200)  
+            }
+        ));
     };
 };

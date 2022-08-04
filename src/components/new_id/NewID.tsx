@@ -1,5 +1,4 @@
-import './style.css';
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, Suspense, lazy } from "react";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
@@ -7,6 +6,7 @@ import { useActions } from '../../hooks/useActions';
 import { getDate } from "../../utils/utils";
 import {CommentsList} from './CommentsList';
 import { NewsItemType } from '../../types/types';
+import {ErrorBoundary} from 'react-error-boundary'
 
 const NewID = () => {
     const newsItems = useTypedSelector(state => state.news);
@@ -16,9 +16,10 @@ const NewID = () => {
 
     useEffect(() =>{
         getComments(Number(id));
-        setInterval(() =>{
+        const instervalId = setInterval(() =>{
            getComments(Number(id)); 
         }, 60000)
+        return () => clearInterval(instervalId);
     }, [])
 
     const newsItem = useMemo(
@@ -34,18 +35,20 @@ const NewID = () => {
                         <div className="col p-4 d-flex flex-column position-static">
                         <h3 className="mb-0"><a href={newsItem?.url}>{newsItem?.title}</a></h3>
                         <div className="mb-1 text-muted">Дата публикации: <i>{getDate(Number(newsItem?.time))}</i></div>
-                            <p className="card-text mb-auto">
+                            <div className="card-text mb-auto">
                                 <div className="color">
                                     Пользователь: @<i>{newsItem?.user}</i><br/>
                                     Карма: <i>{newsItem?.points}</i><br/>
                                     <i>{newsItem?.comments_count} комментариев</i>
                                 </div>
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <p>Коммментарии:</p>
-                <CommentsList comments={comments}/>
+                <ErrorBoundary fallback={<i>Не удалось загрузить комментарии</i>}>
+                    <CommentsList comments={comments}/>
+                </ErrorBoundary>
             </Container>
         </>
     );

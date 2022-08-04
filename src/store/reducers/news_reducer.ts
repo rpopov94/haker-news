@@ -16,7 +16,12 @@ export const news_reducer = (state = initialState, action: Actions): StateType =
             return {...newState, loading: false};
         }
         case ActionTypes.CLEAR_ALL_NEWS:{
-            return initialState;
+            return {
+                news: [],
+                comments: [],
+                error: '',
+                loading: true
+            };
         }
         case ActionTypes.FETCH_NEWS_SUCCESS: {
             const newState = {...state};

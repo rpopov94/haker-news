@@ -23,10 +23,6 @@ const Header: React.FC<HeaderProps> = ({mode})  => {
     fetchNews();
   }
 
-  const updateComments = () => {
-
-  }
-
   return (
   <div>
       <Container>
@@ -53,7 +49,7 @@ const Header: React.FC<HeaderProps> = ({mode})  => {
                         <span className="b">Go Back</span>
                       </Button>
                       {' '}
-                      <Button onClick={() => updateComments()}>
+                      <Button>
                         <span className="b">Update comments</span>
                       </Button>
                     </>

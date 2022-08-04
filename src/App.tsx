@@ -5,12 +5,12 @@ import Header from './components/header/Header';
 import Home from './components/home/Home';
 import NewID from './components/new_id/NewID';
 import { useTypedSelector } from './hooks/useTypedSelector';
-import Loader from "./components/loader/Loader";
+import {Loader} from "./components/loader/Loader";
 import { Container } from "react-bootstrap";
 
 const App = () => {
 
-  const news = useTypedSelector(state => state.news)
+  const news = useTypedSelector(state => state.news);
     
   return (
     <div>
