@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import './App.css';
+import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/header/Header';
-import Home from './components/home/Home';
-import NewID from './components/new_id/NewID';
-import { useTypedSelector } from './hooks/useTypedSelector';
+import Header from "./components/header/Header";
+import Home from "./components/home/Home";
+import NewID from "./components/new_id/NewID";
+import { useTypedSelector } from "./hooks/useTypedSelector";
 import {Loader} from "./components/loader/Loader";
 import { Container } from "react-bootstrap";
 

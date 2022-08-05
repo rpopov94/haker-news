@@ -23,7 +23,7 @@ interface FetchNewsErrorAction {
 
 interface FetchListComments {
     type: ActionTypes.FETCH_LIST_COMMENTS;
-    payload: Array<CommentsItemType>;
+    payload: CommentsItemType[];
     loading: boolean;
 }
 

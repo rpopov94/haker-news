@@ -5,13 +5,14 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from '../../hooks/useActions';
 import { getDate } from "../../utils/utils";
 import {CommentsList} from './CommentsList';
-import { NewsItemType } from '../../types/types';
+import {NewsItemType, StateType} from '../../types/types';
 import {ErrorBoundary} from 'react-error-boundary'
+import {useSelector} from "react-redux";
 
 const NewID = () => {
     const newsItems = useTypedSelector(state => state.news);
     const {getComments} = useActions();
-    const comments = useTypedSelector(state => state.comments);
+    const comments = useSelector((state: StateType) => state.comments);
     const {id} = useParams();
 
     useEffect(() =>{
@@ -46,9 +47,9 @@ const NewID = () => {
                     </div>
                 </div>
                 <p>Коммментарии:</p>
-                <ErrorBoundary fallback={<i>Не удалось загрузить комментарии</i>}>
-                    <CommentsList comments={comments}/>
-                </ErrorBoundary>
+                    <ErrorBoundary fallback={<i>Не удалось загрузить комментарии</i>}>
+                        <CommentsList comments={comments}/>
+                    </ErrorBoundary>
             </Container>
         </>
     );

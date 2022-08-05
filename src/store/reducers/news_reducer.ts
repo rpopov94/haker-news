@@ -59,13 +59,18 @@ export const CommReducer = (state = initialState, action: Actions): StateType =>
         case ActionTypes.FETCH_LIST_COMMENTS: {
             const newState = {...state};
             if (action.payload) {
-                newState.comments = action.payload;
+                action.payload = newState.comments;
             }
 
             return newState;
         }
         case ActionTypes.CLEAR_ALL_COMMENTS:{
-            return initialState;
+             return {
+                news: [],
+                comments: [],
+                error: '',
+                loading: true
+            };
         }
         default:
             return state;
