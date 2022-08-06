@@ -27,4 +27,5 @@ export interface CommentsItemType {
     comments: CommentsItemType[];
     comments_count?: number;
     time_ago: string;
+    time: number;
 }
