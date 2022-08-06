@@ -3,13 +3,10 @@ export interface StateType {
     comments: CommentsItemType[];
     error: string;
     loading: boolean;
-    data?: {
-        news: NewsItemType[];
-        comments: CommentsItemType[];
-    };
 }
 
 export interface NewsItemType {
+    time_ago: string;
     id: number;
     index: number;
     title: string;
@@ -22,12 +19,12 @@ export interface NewsItemType {
 
 export interface CommentsItemType {
     id: string;
-    user: string;
-    title: string;
-    points: string;
-    url: string;
-    content: string;
-    time: number;
+    user?: string;
+    title?: string;
+    points?: string;
+    url?: string;
+    content?: string;
     comments: CommentsItemType[];
-    comments_count: number;
+    comments_count?: number;
+    time_ago: string;
 }

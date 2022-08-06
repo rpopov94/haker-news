@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { CommentsItemType } from "../../types/types"
-import { getDate } from "../../utils/utils";
 import {Card} from "react-bootstrap";
 
 export interface CommentsProps {
@@ -8,16 +7,15 @@ export interface CommentsProps {
   }
 
 export const CommentsList: FC<CommentsProps> = ({comments}) =>{
-    const arrayOfComments = (Array.isArray(comments) && comments) || comments.comments;
     return(
         <>
-        {arrayOfComments.map((item: CommentsItemType, id) =>{
+        {comments?.map((item: CommentsItemType) =>{
             <Card>
                 <Card.Header>{item.user}</Card.Header>
                 <Card.Body>
                     <Card.Title>{item?.content}</Card.Title>
                     <Card.Text>
-                        {getDate(Number(item?.time))}
+                        {item?.time_ago}
                     </Card.Text>
                 </Card.Body>
             </Card>

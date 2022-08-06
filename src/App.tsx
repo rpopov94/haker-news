@@ -26,16 +26,6 @@ const App = () => {
                 <Home/>
             </>
         }/>
-        <Route path="/news" element={
-            <>
-                <Header mode="news"/>
-                {
-                  news.error? <Container>"Oops, you catch error!"</Container>:
-                  news.loading && <Loader/>
-                }
-                <Home/>
-            </>
-        }/>
         <Route path="/news/:id" element={
             <>
                 <Header mode="comments"/>

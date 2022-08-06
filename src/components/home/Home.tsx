@@ -1,10 +1,9 @@
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useEffect, useRef} from 'react';
+import {useEffect} from 'react';
 import { NewsItemType } from '../../types/types';
 import { useActions } from '../../hooks/useActions';
-import { getDate } from '../../utils/utils';
 import {ErrorBoundary} from 'react-error-boundary'
 import {Loader} from "../loader/Loader";
 
@@ -31,7 +30,7 @@ const Home = () => {
                                     {news.title}</Link>
                                 / Rating: {news.points}
                                 / User: {news.user}
-                                / Date of publication: {getDate(news.time)}
+                                / Date of publication: {news.time_ago}
                             </li>
                         )}
                     </ol>

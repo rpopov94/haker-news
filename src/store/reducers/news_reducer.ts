@@ -33,7 +33,7 @@ export const news_reducer = (state = initialState, action: Actions): StateType =
                     .filter((item, index) => newState.news.indexOf(item) === index)
                     .sort(function (a: NewsItemType, b: NewsItemType): number {
                         if (a.time && b.time) return b.time - a.time;
-                        else return Number(null);
+                        else return 0;
                     })
                     .slice(0, 100);
                 return {...newState, news: newArrayNews};
@@ -41,37 +41,27 @@ export const news_reducer = (state = initialState, action: Actions): StateType =
 
             return {...newState};
         }
-        case ActionTypes.CATCH_ERROR:{
-            const newState = {...state};
-            return {...newState, error: 'Вы словили ошибку!'};
-        }
-        default:
-            return state;
-    }
-}
 
-export const CommReducer = (state = initialState, action: Actions): StateType => {
-    switch (action.type) {
         case ActionTypes.LOAD_COMMENTS: {
-            const newState = {...state};
-            return {...newState, loading: true};
+            return {comments: [], error: "", news: [], loading: true};
         }
         case ActionTypes.FETCH_LIST_COMMENTS: {
-            const newState = {...state};
-            if (action.payload) {
-                action.payload = newState.comments;
-            }
-
-            return newState;
+           return {comments: action.payload, error: "", loading: false, news: []}
         }
         case ActionTypes.CLEAR_ALL_COMMENTS:{
-             return {
+            return {
                 news: [],
                 comments: [],
                 error: '',
                 loading: true
             };
         }
+
+        case ActionTypes.CATCH_ERROR:{
+            const newState = {...state};
+            return {...newState, error: 'Вы словили ошибку!'};
+        }
+
         default:
             return state;
     }
